@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payroll Dashboard</title>
+    <style>
+        .dashboard {
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #000;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .dashboard h2 {
+            color: #0000FF;
+        }
+        .dashboard table {
+            width: 100%;
+            margin-top: 20px;
+        }
+        .dashboard table td {
+            padding: 10px;
+        }
+        .dashboard table input, .dashboard table select {
+            width: 100%;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <h2>Payroll Dashboard</h2>
+        <table>
+            <form method="post" >
+            <tr>
+                <td colspan="2">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                </td>
+            </tr>
+            <tr>
+                {% if gross_pay is not None and net_pay is not None %}
+                <td><label>Gross Pay  <input value="{{ gross_pay }}"></label></td>
+                <td><label>Net Pay  <input value="{{ net_pay }}"></label></td>
+                {% endif %}
+            </tr>
+            <tr> <td colspan="2"><button type="submit">Calculate</button></td></tr>
+        </form>
+        </table>
+    </div>
+</body>
+</html>
